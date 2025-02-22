@@ -47,6 +47,14 @@ public class Armour extends Item {
     public Armour()
     {
         // Initialize all data members (including those inherited from Item)
+        super("", false); 
+        //this.setName(""); 
+        this.setDurability(0);
+        this.setDefense(0);
+        this.setMaterial("");
+        // "no modifier"
+        this.setModifierLevel(0);
+        this.setElement("");
     }
 
     /**
@@ -57,6 +65,15 @@ public class Armour extends Item {
     public Armour(Armour src)
     {
         // Set and/or copy data members for *this* object based on *src*.
+        this.name = src.getName();
+        this.stackable = false;
+        this.durability = src.getDurability();
+        this.defense = src.getDefense();
+        this.material = src.getMaterial();
+        this.modifier = src.getModifier();
+        this.modiferLevel = src.getModifierLevel();
+        this.element = src.getElement();
+
     }
 
     /**
@@ -190,8 +207,13 @@ public class Armour extends Item {
     public void read(Scanner snr)
     {
         super.name   = snr.next();
-
         // Complete this method
+        this.material = snr.next();
+        this.durability = snr.nextInt();
+        this.defense = snr.nextInt();
+        this.modifier = snr.next();
+        this.modiferLevel = snr.nextInt();
+        this.element = snr.next();
     }
 
     /**
@@ -201,7 +223,7 @@ public class Armour extends Item {
     public Item clone()
     {
         // Replace the next line
-        return null;
+        return new Armour(this);
     }
 
     /**
@@ -210,7 +232,12 @@ public class Armour extends Item {
     @Override
     public String toString()
     {
-        return "Implement This Function";
+        return String.format("  Nme: %s%n", this.name)
+             + String.format("  Dur: %d%n", this.durability)
+             + String.format("  Def: %d%n", this.defense)
+             + String.format("  Mtl: %s%n", this.material)
+             + String.format("  Mdr: %s (Lvl %d)%n", this.modifier, this.modiferLevel)
+             + String.format("  Emt: %s%n", this.element);
     }
 }
 
